@@ -3,6 +3,7 @@ package lk.ijse.spms.userservice.service.custom.impl;
 import lk.ijse.spms.userservice.dto.UserRequestDTO;
 import lk.ijse.spms.userservice.dto.UserResponseDTO;
 import lk.ijse.spms.userservice.enums.Role;
+import lk.ijse.spms.userservice.exception.UserNotFoundException;
 import lk.ijse.spms.userservice.model.User;
 import lk.ijse.spms.userservice.repository.UserRepository;
 import lk.ijse.spms.userservice.service.custom.UserService;
@@ -25,6 +26,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserResponseDTO getById(String id) {
-        
+        User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
+        return modelMapper.map(user, UserResponseDTO.class);
     }
 }
