@@ -18,8 +18,8 @@ public class UserServiceImpl implements UserService {
     private final ModelMapper modelMapper;
 
     @Override
-    public UserResponseDTO register(UserRequestDTO dto) {
-        User user = modelMapper.map(dto, User.class);
+    public UserResponseDTO register(UserRequestDTO userRequest) {
+        User user = modelMapper.map(userRequest, User.class);
         User savedUser = userRepository.save(user);
         return modelMapper.map(savedUser, UserResponseDTO.class);
     }
@@ -28,5 +28,12 @@ public class UserServiceImpl implements UserService {
     public UserResponseDTO getById(String id) {
         User user = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
         return modelMapper.map(user, UserResponseDTO.class);
+    }
+
+    public UserResponseDTO update(String id, UserRequestDTO userRequest) {
+        User existingUser = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
+        modelMapper.map(userRequest, existingUser);
+        User updateUser = userRepository.save(existingUser);
+        return modelMapper.map(updateUser, UserResponseDTO.class);
     }
 }
