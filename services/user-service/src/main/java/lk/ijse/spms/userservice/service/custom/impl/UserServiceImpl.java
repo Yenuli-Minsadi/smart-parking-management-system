@@ -30,10 +30,13 @@ public class UserServiceImpl implements UserService {
         return modelMapper.map(user, UserResponseDTO.class);
     }
 
+    @Override
     public UserResponseDTO update(String id, UserRequestDTO userRequest) {
         User existingUser = userRepository.findById(id).orElseThrow(() -> new UserNotFoundException("User not found with id: " + id));
         modelMapper.map(userRequest, existingUser);
         User updateUser = userRepository.save(existingUser);
         return modelMapper.map(updateUser, UserResponseDTO.class);
     }
+
+
 }
