@@ -38,5 +38,12 @@ public class UserServiceImpl implements UserService {
         return modelMapper.map(updateUser, UserResponseDTO.class);
     }
 
+    @Override
+    public void delete(String id) {
+        if (!userRepository.existsById(id)) {
+            throw new UserNotFoundException(id);
+        }
+        userRepository.deleteById(id);
+    }
 
 }
