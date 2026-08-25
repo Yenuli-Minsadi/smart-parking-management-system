@@ -5,26 +5,26 @@ import lk.ijse.spms.userservice.dto.UserResponseDTO;
 import lk.ijse.spms.userservice.enums.Role;
 import lk.ijse.spms.userservice.model.User;
 import lk.ijse.spms.userservice.repository.UserRepository;
+import lk.ijse.spms.userservice.service.custom.UserService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl {
+public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
+    private final ModelMapper modelMapper;
 
     @Override
     public UserResponseDTO register(UserRequestDTO dto) {
-        User user = User.builder()
-                .fullName(dto.getFullName())
-                .email(dto.getEmail())
-                .password(dto.getPassword())
-                .phoneNumber(dto.getPhoneNumber())
-                .role(Role.valueOf(dto.getRole()))
-                .build();
+        User user = modelMapper.map(dto, User.class);
+        User savedUser = userRepository.save(user);
+        return modelMapper.map(savedUser, UserResponseDTO.class);
+    }
 
-        User saveUser = userRepository.save(user);
-        return new UserResponseDTO(saveUser);
-
+    @Override
+    public UserResponseDTO getById(String id) {
+        
     }
 }
