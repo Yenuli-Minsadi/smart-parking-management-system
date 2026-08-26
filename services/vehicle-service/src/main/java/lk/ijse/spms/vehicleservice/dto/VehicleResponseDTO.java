@@ -1,8 +1,6 @@
 package lk.ijse.spms.vehicleservice.dto;
 
-import jakarta.validation.constraints.NotBlank;
 import lombok.*;
-import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
 
