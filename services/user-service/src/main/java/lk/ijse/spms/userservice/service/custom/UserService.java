@@ -9,6 +9,6 @@ public interface UserService {
     UserResponseDTO getById(String id);
     List<UserResponseDTO> getAll();
     UserResponseDTO update(String id, UserRequestDTO dto);
-    UserResponseDTO addBookingToHistory(String id, String bookingRef);
+    UserResponseDTO addReservationToHistory(String id, String reservationRef);
     void delete(String id);
 }

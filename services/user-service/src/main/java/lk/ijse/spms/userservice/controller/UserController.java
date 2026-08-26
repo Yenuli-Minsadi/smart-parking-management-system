@@ -36,9 +36,9 @@ public class UserController {
         return ResponseEntity.ok(userService.update(id, dto));
     }
 
-    @PutMapping("/{id}/booking-history")
-    public ResponseEntity<UserResponseDTO> addBooking(@PathVariable String id, @RequestBody String bookingRef) {
-        return ResponseEntity.ok(userService.addBookingToHistory(id, bookingRef));
+    @PutMapping("/{id}/reservation-history")
+    public ResponseEntity<UserResponseDTO> addReservation(@PathVariable String id, @RequestBody String reservationRef) {
+        return ResponseEntity.ok(userService.addReservationToHistory(id, reservationRef));
     }
 
     @DeleteMapping("/{id}")
