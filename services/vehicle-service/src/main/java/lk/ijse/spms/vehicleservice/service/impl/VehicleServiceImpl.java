@@ -2,6 +2,7 @@ package lk.ijse.spms.vehicleservice.service.impl;
 
 import lk.ijse.spms.vehicleservice.dto.VehicleRequestDTO;
 import lk.ijse.spms.vehicleservice.dto.VehicleResponseDTO;
+import lk.ijse.spms.vehicleservice.exception.VehicleNotFoundException;
 import lk.ijse.spms.vehicleservice.model.Vehicle;
 import lk.ijse.spms.vehicleservice.repository.VehicleRepository;
 import lk.ijse.spms.vehicleservice.service.custom.VehicleService;
@@ -21,5 +22,11 @@ public class VehicleServiceImpl implements VehicleService {
         vehicle.setCurrentlyParked(false);
         Vehicle savedVehicle = vehicleRepository.save(vehicle);
         return modelMapper.map(savedVehicle, VehicleResponseDTO.class);
+    }
+
+    @Override
+    public VehicleResponseDTO getById(Long id) {
+        Vehicle vehicle = vehicleRepository.findById(id).orElseThrow(() -> new VehicleNotFoundException(id));
+        return modelMapper.map(vehicle, VehicleResponseDTO.class);
     }
 }
