@@ -27,7 +27,7 @@ public class Vehicle {
     private String vehicleType;
 
     @Column(nullable = false)
-    private String ownerId;
+    private Long ownerId;
 
     private LocalDateTime entryTime;
     private LocalDateTime exitTime;
