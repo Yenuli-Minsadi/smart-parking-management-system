@@ -63,6 +63,14 @@ public class VehicleServiceImpl implements VehicleService {
         return modelMapper.map(vehicleRepository.save(vehicle), VehicleResponseDTO.class);
     }
 
+    @Override
+    public VehicleResponseDTO recordExit(Long id) {
+        Vehicle vehicle = findEntity(id);
+        vehicle.setExitTime(LocalDateTime.now());
+        vehicle.setCurrentlyParked(false);
+        return modelMapper.map(vehicleRepository.save(vehicle), VehicleResponseDTO.class);
+    }
+
     private Vehicle findEntity(Long id) {
         return vehicleRepository.findById(id).orElseThrow(() -> new VehicleNotFoundException(id));
     }
