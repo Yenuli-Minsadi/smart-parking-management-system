@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -52,5 +53,17 @@ public class VehicleServiceImpl implements VehicleService {
             throw new VehicleNotFoundException(id);
         }
         vehicleRepository.deleteById(id);
+    }
+
+    @Override
+    public VehicleResponseDTO recordEntry(Long id) {
+        Vehicle vehicle = findEntity(id);
+        vehicle.setEntryTime(LocalDateTime.now());
+        vehicle.setCurrentlyParked(true);
+        return modelMapper.map(vehicleRepository.save(vehicle), VehicleResponseDTO.class);
+    }
+
+    private Vehicle findEntity(Long id) {
+        return vehicleRepository.findById(id).orElseThrow(() -> new VehicleNotFoundException(id));
     }
 }
