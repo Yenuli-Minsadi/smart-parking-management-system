@@ -10,6 +10,9 @@ import lombok.RequiredArgsConstructor;
 import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Service
 @RequiredArgsConstructor
 public class VehicleServiceImpl implements VehicleService {
@@ -29,4 +32,11 @@ public class VehicleServiceImpl implements VehicleService {
         Vehicle vehicle = vehicleRepository.findById(id).orElseThrow(() -> new VehicleNotFoundException(id));
         return modelMapper.map(vehicle, VehicleResponseDTO.class);
     }
+
+    @Override
+    public List<VehicleResponseDTO> getAll() {
+        return vehicleRepository.findAll().stream().map( vehicle -> modelMapper.map(vehicle, VehicleResponseDTO.class))
+                .collect(Collectors.toList());
+    }
+
 }
