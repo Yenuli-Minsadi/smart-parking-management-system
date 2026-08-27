@@ -39,4 +39,10 @@ public class VehicleServiceImpl implements VehicleService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<VehicleResponseDTO> getByOwner(Long ownerId) {
+        return vehicleRepository.findById(ownerId).stream().map(vehicle -> modelMapper.map(vehicle, VehicleResponseDTO.class))
+                .collect(Collectors.toList());
+
+    }
 }
