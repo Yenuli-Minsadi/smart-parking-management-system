@@ -45,4 +45,12 @@ public class VehicleServiceImpl implements VehicleService {
                 .collect(Collectors.toList());
 
     }
+
+    @Override
+    public void delete(Long id) {
+        if (!vehicleRepository.existsById(id)) {
+            throw new VehicleNotFoundException(id);
+        }
+        vehicleRepository.deleteById(id);
+    }
 }
