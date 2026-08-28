@@ -5,7 +5,7 @@ import lk.ijse.spms.parkingspaceservice.enums.ParkingStatus;
 import lombok.*;
 
 @Entity
-@Table(name = "ParkingSpace")
+@Table(name = "parking_space")
 @Getter
 @Setter
 @NoArgsConstructor
