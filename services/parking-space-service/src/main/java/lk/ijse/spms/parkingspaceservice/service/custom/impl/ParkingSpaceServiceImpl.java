@@ -14,7 +14,7 @@ import org.springframework.stereotype.Service;
 public class ParkingSpaceServiceImpl implements ParkingSpaceService {
     private final ParkingSpaceRepository parkingSpaceRepository;
     private final ModelMapper modelMapper;
-    
+
     @Override
     public ParkingSpaceResponseDTO createParkingSpace(ParkingSpaceRequestDTO parkingSpaceRequest) {
         ParkingSpace parkingSpace = modelMapper.map(parkingSpaceRequest, ParkingSpace.class);
