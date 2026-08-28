@@ -1,4 +1,4 @@
-package lk.ijse.spms.vehicleservice.service.impl;
+package lk.ijse.spms.vehicleservice.service.custom.impl;
 
 import lk.ijse.spms.vehicleservice.dto.VehicleRequestDTO;
 import lk.ijse.spms.vehicleservice.dto.VehicleResponseDTO;
@@ -21,8 +21,8 @@ public class VehicleServiceImpl implements VehicleService {
     private final ModelMapper modelMapper;
 
     @Override
-    public VehicleResponseDTO register(VehicleRequestDTO dto) {
-        Vehicle vehicle = modelMapper.map(dto, Vehicle.class);
+    public VehicleResponseDTO register(VehicleRequestDTO vehicleRequest) {
+        Vehicle vehicle = modelMapper.map(vehicleRequest, Vehicle.class);
         vehicle.setCurrentlyParked(false);
         Vehicle savedVehicle = vehicleRepository.save(vehicle);
         return modelMapper.map(savedVehicle, VehicleResponseDTO.class);
