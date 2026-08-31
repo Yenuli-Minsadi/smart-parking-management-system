@@ -29,8 +29,7 @@ public class PaymentServiceController {
     }
 
     @GetMapping
-    public ResponseEntity<List<PaymentResponseDTO>> getAll(
-            @RequestParam(required = false) String userId) {
+    public ResponseEntity<List<PaymentResponseDTO>> getAll(@RequestParam(required = false) String userId) {
         if (userId != null) {
             return ResponseEntity.ok(paymentService.getByUser(userId));
         }
