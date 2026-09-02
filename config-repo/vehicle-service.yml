@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432//spms_vehicle
+    url: jdbc:postgresql://localhost:5432/spms_vehicle
     username: postgres
     password: ${DB_PASSWORD}
 
